@@ -1,18 +1,16 @@
 
-    //VARIABLES//
-    var totalScore;
-    var randNum;
-    var wins = 0;
-    var losses = 0;
-    var crystalVal = [];
-    var grnCrystalVal;
-    var whtCrystalVal;
-    var goldCrystalVal;
-    var purpCrystalVal;
+//VARIABLES//
+var totalScore;
+var randNum;
+var wins = 0;
+var losses = 0;
 
-    //FUNCTIONS//
+//FUNCTIONS//
 $(document).ready(function () {
+    //Sets the game to beginning state: new random number, new values on crystals, total score equals 0
     function beginGame(){
+        totalScore = 0;
+
         // generate random number (19-120)
         var numMax = 120;
         var numMin = 19;
@@ -26,22 +24,30 @@ $(document).ready(function () {
 
         $(".crystal").each(function(){
             $(this).val(Math.floor(Math.random()*(crysMax-crysMin +1))+crysMin);
-        });
-
-
-        //assign value to each crystal on click
-        $(".crystal").click(function(){
-            console.log($(this).val());
-        })
+        });        
     }
 
-    // on click add value of crystal to total score
-
-    // when total score equals random number increment wins
-    // when total score goes over random number increment losses
-    // after win or loss happens reset the game (new random number, new values on crystals, total score equals 0)
+    // increment wins and losses counters
+    function checkWinOrLose(){
+        if(totalScore === randNum){
+            wins++;
+            $("#displayWins").text(wins);
+            beginGame();
+        }
+        else if(totalScore>randNum){            
+            losses++;
+            $("#displayLosses").text(losses);
+            beginGame();
+        }
+    }
 
     //EVENTS//
+        // on click add value of crystal to total score
+    $(".crystal").click(function(){
+        totalScore += parseInt($(this).val());
+        $("#displayTotalScore").text(totalScore);
+        checkWinOrLose();
+    })
 
     beginGame();
 });
