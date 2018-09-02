@@ -10,30 +10,96 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
   </head>
-  <body>
+  <body class="color-change-2x">
     <header>
-      <h1>Crystal Collector EXTREME</h1>
+      <div class="jumbotron">
+        <div class="container">
+          <h1>
+            <span class="h1Text">
+            Crystal Collector 
+            </span>
+              <span class="text-pop-up-top">
+                EXTREME
+              </span>
+          </h1>
+          <hr>
+          <p class="instructions">Each crystal has a random value. Keep clicking crystals until you match the number displayed. 
+            Be careful not to go over!</p>
+          <p class="instructions">Are you EXTREME enough to win?</p>
+        </div>
+      </div>
     </header>
 
     <section>
-      <p>
-        Each crystal has a unique value. Keep clicking crystals until you match the number displayed. Be careful not to 
-        go over or they'll EAT YOU!
-      </p>
+      <div class="container">
+        <div class="row" id="winLossText">
+          <div class="col-sm-6">
+            <p>Wins:
+              <span id="displayWins"></span>
+            </p>
+          </div>
 
-      <p>Match this number: </p>
-      <p id="displayRandNum"></p>
-      <img id="grnCrystal" class="crystal" src="assets/images/grnCrystal.png">
-      <img id="whtCrystal" class="crystal" src="assets/images/sprklyCrystal.png">
-      <img id="goldCrystal" class="crystal" src="assets/images/goldCrystal.png">
-      <img id="purpCrystal" class="crystal" src="assets/images/purpCrystal.png">
-      <p>Wins:</p>
-      <p id="displayWins"></p>
-      <p>Losses:</p>
-      <p id="displayLosses"></p>
-      <p>Total Score:</p>
-      <p id="displayTotalScore"></p>
+          <div class="col-sm-6">
+            <p>Losses:
+            <span id="displayLosses"></span>
+              </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row tracking-in-expand-fwd">
+          <div class="col-sm" id="matchNumber">
+            <p>Match this number: 
+            <span id="displayRandNum"></span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+          <div class="row">
+            <div class="col-sm">
+              <img id="grnCrystal" class="crystal" src="assets/images/grnCrystal.png">
+            </div>
+            <div class="col-sm">
+                <img id="whtCrystal" class="crystal" src="assets/images/sprklyCrystal.png">
+            </div>
+            <div class="col-sm">
+                <img id="goldCrystal" class="crystal" src="assets/images/goldCrystal.png">
+            </div>
+            <div class="col-sm">
+                <img id="purpCrystal" class="crystal" src="assets/images/purpCrystal.png">
+            </div>
+          </div>
+      </div>
+            
+      <div class="container tracking-in-expand-fwd">
+        <div class="row">
+          <div class="col-sm" id="currentCountText">
+            <p>Current Count:
+            <span id="displayCurrentCount"></span>
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
+    
+  <!--WIN/LOSE MODAL-->
+  <div class="modal fade" id="winLoseModal" tabindex="-1" role="dialog" aria-labelledby="winLoseModalTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="winLoseModalTitle"></h5>
+
+        </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="restartButton">Restart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

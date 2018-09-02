@@ -1,6 +1,6 @@
 
 //VARIABLES//
-var totalScore;
+var currentCount;
 var randNum;
 var wins = 0;
 var losses = 0;
@@ -9,7 +9,10 @@ var losses = 0;
 $(document).ready(function () {
     //Sets the game to beginning state: new random number, new values on crystals, total score equals 0
     function beginGame(){
-        totalScore = 0;
+        currentCount = 0;
+        $("#displayCurrentCount").text(currentCount);
+        $("#displayWins").text(wins);
+        $("#displayLosses").text(losses);
 
         // generate random number (19-120)
         var numMax = 120;
@@ -29,25 +32,39 @@ $(document).ready(function () {
 
     // increment wins and losses counters
     function checkWinOrLose(){
-        if(totalScore === randNum){
+        if(currentCount === randNum){
             wins++;
             $("#displayWins").text(wins);
-            beginGame();
+                $(document).ready(function(){
+                    $("#winLoseModal").modal();
+                    $("#winLoseModalTitle").html("YOU WIN");
+                    $(".modal-body").html("You are an EXTREME crystal collector!");
+                })
         }
-        else if(totalScore>randNum){            
+        else if(currentCount>randNum){
             losses++;
             $("#displayLosses").text(losses);
-            beginGame();
+            $(document).ready(function(){
+                $("#winLoseModal").modal();
+                $("#winLoseModalTitle").html("YOU LOSE");
+                $(".modal-body").html("You weren't EXTREME enough!");
+            })
         }
     }
 
     //EVENTS//
         // on click add value of crystal to total score
     $(".crystal").click(function(){
-        totalScore += parseInt($(this).val());
-        $("#displayTotalScore").text(totalScore);
+        //Used parseInt because currentCount was displaying as a string. Not sure why.
+        currentCount += parseInt($(this).val());
+        $("#displayCurrentCount").text(currentCount);
         checkWinOrLose();
     })
+
+    $("#restartButton").click(function(){
+        $("#winLoseModal").modal("toggle");
+        beginGame();
+    });
 
     beginGame();
 });
