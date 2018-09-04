@@ -1,12 +1,12 @@
 
-//VARIABLES//
-var currentCount;
-var randNum;
-var wins = 0;
-var losses = 0;
-
 //FUNCTIONS//
 $(document).ready(function () {
+    //VARIABLES//
+    var currentCount;
+    var randNum;
+    var wins = 0;
+    var losses = 0;
+
     //Sets the game to beginning state: new random number, new values on crystals, total score equals 0
     function beginGame(){
         currentCount = 0;
@@ -15,19 +15,17 @@ $(document).ready(function () {
         $("#displayLosses").text(losses);
 
         // generate random number (19-120)
-        var numMax = 120;
-        var numMin = 19;
-
-        randNum = Math.floor(Math.random()*(numMax-numMin +1))+numMin;
+        randNum = generateRandNum(19,120);
         $("#displayRandNum").text(randNum);
 
         // generate random numbers for each crystal (1-12)
-        var crysMax = 12;
-        var crysMin = 1;
-
         $(".crystal").each(function(){
-            $(this).val(Math.floor(Math.random()*(crysMax-crysMin +1))+crysMin);
+            $(this).val(generateRandNum(1,12));
         });        
+    }
+
+    function generateRandNum(x, y){
+        return Math.floor(Math.random() * (y - x + 1)) + x;
     }
 
     // increment wins and losses counters
@@ -35,20 +33,16 @@ $(document).ready(function () {
         if(currentCount === randNum){
             wins++;
             $("#displayWins").text(wins);
-                $(document).ready(function(){
-                    $("#winLoseModal").modal();
-                    $("#winLoseModalTitle").html("YOU WIN");
-                    $(".modal-body").html("You are an EXTREME crystal collector!");
-                })
+            $("#winLoseModal").modal();
+            $("#winLoseModalTitle").text("YOU WIN");
+            $(".modal-body").text("You are an EXTREME crystal collector!");
         }
-        else if(currentCount>randNum){
+        else if(currentCount > randNum){
             losses++;
             $("#displayLosses").text(losses);
-            $(document).ready(function(){
-                $("#winLoseModal").modal();
-                $("#winLoseModalTitle").html("YOU LOSE");
-                $(".modal-body").html("You weren't EXTREME enough!");
-            })
+            $("#winLoseModal").modal();
+            $("#winLoseModalTitle").text("YOU LOSE");
+            $(".modal-body").text("You weren't EXTREME enough!");
         }
     }
 
